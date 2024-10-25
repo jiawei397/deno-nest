@@ -1,14 +1,12 @@
 // deno-lint-ignore-file no-explicit-any
-import { vary } from "../deps.ts";
+import { vary } from "./vary.ts";
 import type { CORSHeader, CORSHeaders, CorsOptions } from "./types.ts";
 import type {
   Request,
   Response,
-} from "../../../src/interfaces/context.interface.ts";
-import type {
   NestMiddleware,
   Next,
-} from "../../../src/interfaces/middleware.interface.ts";
+} from "@nest/core";
 
 export const defaults: CorsOptions = {
   origin: true, // "*",
