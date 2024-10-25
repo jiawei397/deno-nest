@@ -74,7 +74,7 @@ export class HttpException extends Error {
 export class UnauthorizedException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.Unauthorized],
+    description: string = STATUS_TEXT[STATUS_CODE.Unauthorized],
     cause?: unknown,
   ) {
     super(
@@ -117,7 +117,7 @@ export class UnauthorizedException extends HttpException {
 export class NotFoundException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.NotFound],
+    description: string = STATUS_TEXT[STATUS_CODE.NotFound],
     cause?: unknown,
   ) {
     super(
@@ -160,7 +160,7 @@ export class NotFoundException extends HttpException {
 export class ForbiddenException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.Forbidden],
+    description: string = STATUS_TEXT[STATUS_CODE.Forbidden],
     cause?: unknown,
   ) {
     super(
@@ -246,7 +246,7 @@ export class BadRequestException extends HttpException {
 export class BodyParamValidationException extends BadRequestException {
   constructor(
     objectOrError: any,
-    description = "params not valid",
+    description: string = "params not valid",
     cause?: unknown,
   ) {
     super(objectOrError, description, cause);
@@ -281,7 +281,7 @@ export class BodyParamValidationException extends BadRequestException {
 export class BadGatewayException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.BadGateway],
+    description: string = STATUS_TEXT[STATUS_CODE.BadGateway],
     cause?: unknown,
   ) {
     super(
@@ -324,7 +324,7 @@ export class BadGatewayException extends HttpException {
 export class NotAcceptableException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.NotAcceptable],
+    description: string = STATUS_TEXT[STATUS_CODE.NotAcceptable],
     cause?: unknown,
   ) {
     super(
@@ -366,7 +366,7 @@ export class NotAcceptableException extends HttpException {
 export class RequestTimeoutException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.RequestTimeout],
+    description: string = STATUS_TEXT[STATUS_CODE.RequestTimeout],
     cause?: unknown,
   ) {
     super(
@@ -408,7 +408,7 @@ export class RequestTimeoutException extends HttpException {
 export class ConflictException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.Conflict],
+    description: string = STATUS_TEXT[STATUS_CODE.Conflict],
     cause?: unknown,
   ) {
     super(
@@ -450,7 +450,7 @@ export class ConflictException extends HttpException {
 export class GoneException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.Gone],
+    description: string = STATUS_TEXT[STATUS_CODE.Gone],
     cause?: unknown,
   ) {
     super(
@@ -492,7 +492,7 @@ export class GoneException extends HttpException {
 export class HttpVersionNotSupportedException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.HTTPVersionNotSupported],
+    description: string = STATUS_TEXT[STATUS_CODE.HTTPVersionNotSupported],
     cause?: unknown,
   ) {
     super(
@@ -576,7 +576,7 @@ export class PayloadTooLargeException extends HttpException {
 export class UnsupportedMediaTypeException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.UnsupportedMediaType],
+    description: string = STATUS_TEXT[STATUS_CODE.UnsupportedMediaType],
     cause?: unknown,
   ) {
     super(
@@ -618,7 +618,7 @@ export class UnsupportedMediaTypeException extends HttpException {
 export class UnprocessableEntityException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.UnprocessableEntity],
+    description: string = STATUS_TEXT[STATUS_CODE.UnprocessableEntity],
     cause?: unknown,
   ) {
     super(
@@ -661,7 +661,7 @@ export class UnprocessableEntityException extends HttpException {
 export class InternalServerErrorException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.InternalServerError],
+    description: string = STATUS_TEXT[STATUS_CODE.InternalServerError],
     cause?: unknown,
   ) {
     super(
@@ -704,7 +704,7 @@ export class InternalServerErrorException extends HttpException {
 export class NotImplementedException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.NotImplemented],
+    description: string = STATUS_TEXT[STATUS_CODE.NotImplemented],
     cause?: unknown,
   ) {
     super(
@@ -746,7 +746,7 @@ export class NotImplementedException extends HttpException {
 export class ImATeapotException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.Teapot],
+    description: string = STATUS_TEXT[STATUS_CODE.Teapot],
     cause?: unknown,
   ) {
     super(
@@ -789,7 +789,7 @@ export class ImATeapotException extends HttpException {
 export class MethodNotAllowedException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.MethodNotAllowed],
+    description: string = STATUS_TEXT[STATUS_CODE.MethodNotAllowed],
     cause?: unknown,
   ) {
     super(
@@ -832,7 +832,7 @@ export class MethodNotAllowedException extends HttpException {
 export class ServiceUnavailableException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.ServiceUnavailable],
+    description: string = STATUS_TEXT[STATUS_CODE.ServiceUnavailable],
     cause?: unknown,
   ) {
     super(
@@ -875,7 +875,7 @@ export class ServiceUnavailableException extends HttpException {
 export class GatewayTimeoutException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.GatewayTimeout],
+    description: string = STATUS_TEXT[STATUS_CODE.GatewayTimeout],
     cause?: unknown,
   ) {
     super(
@@ -918,7 +918,7 @@ export class GatewayTimeoutException extends HttpException {
 export class PreconditionFailedException extends HttpException {
   constructor(
     objectOrError: any,
-    description = STATUS_TEXT[STATUS_CODE.PreconditionFailed],
+    description: string = STATUS_TEXT[STATUS_CODE.PreconditionFailed],
     cause?: unknown,
   ) {
     super(
