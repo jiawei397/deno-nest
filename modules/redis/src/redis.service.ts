@@ -11,7 +11,7 @@ export class RedisService {
   // 设置值的方法
   set(key: string, value: any, seconds?: number): Promise<string | null> {
     value = stringify(value);
-    return this.client.set(key, value, seconds ? { ex: seconds } : undefined);
+    return this.client.set(key, value, seconds ? { EX: seconds } : undefined);
   }
 
   // 获取值的方法
@@ -23,35 +23,35 @@ export class RedisService {
   // 推送到数组
   async push(key: string, value: any): Promise<number> {
     value = stringify(value);
-    return await this.client.rpush(key, value);
+    return await this.client.rPush(key, value);
   }
 
   // 推送到数组第一项
   async unshift(key: string, value: any): Promise<number> {
     value = stringify(value);
-    return await this.client.lpush(key, value);
+    return await this.client.lPush(key, value);
   }
 
   // 去掉第一个
   async shift(key: string): Promise<any> {
-    const data = await this.client.lpop(key);
+    const data = await this.client.lPop(key);
     return jsonParse(data);
   }
 
   // 删除最后一个
   async pop(key: string): Promise<any> {
-    const data = await this.client.rpop(key);
+    const data = await this.client.rPop(key);
     return jsonParse(data);
   }
 
   // 根据索引获取
   async index(key: string, index: number): Promise<any> {
-    const data = await this.client.lindex(key, index);
+    const data = await this.client.lIndex(key, index);
     return jsonParse(data);
   }
 
   async size(key: string): Promise<number> {
-    return await this.client.llen(key);
+    return await this.client.lLen(key);
   }
 
   async isEmpty(key: string): Promise<boolean> {
@@ -60,6 +60,6 @@ export class RedisService {
   }
 
   getRange(key: string, start: number, end: number): Promise<string[]> {
-    return this.client.lrange(key, start, end);
+    return this.client.lRange(key, start, end);
   }
 }

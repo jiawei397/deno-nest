@@ -1,10 +1,9 @@
 // deno-lint-ignore-file no-explicit-any
 import { assert, factory, Inject } from "@nest/core";
 import type { ICacheStore } from "@nest/cache";
-import type { Redis } from "../deps.ts";
 import { REDIS_KEY, REDIS_STORE_NAME } from "./redis.constant.ts";
 import { jsonParse, stringify } from "./utils.ts";
-import type { Integer } from "redis";
+import type { Redis } from "../deps.ts";
 
 export class RedisStore implements ICacheStore {
   key = "cache_store";
@@ -29,13 +28,13 @@ export class RedisStore implements ICacheStore {
     key: string,
     value: any,
     options?: { ttl: number },
-  ): Promise<string> {
+  ): Promise<string | null> {
     const newKey = this.getNewKey(key);
-    await this.client.sadd(this.key, key);
+    await this.client.sAdd(this.key, key);
 
     if (options?.ttl) {
       const st = setTimeout(() => {
-        this.client.srem(this.key, key).catch(console.error);
+        this.client.sRem(this.key, key).catch(console.error);
       }, options.ttl * 1000);
       this.timeoutMap.set(key, st);
     }
@@ -44,7 +43,7 @@ export class RedisStore implements ICacheStore {
       stringify(value),
       options
         ? {
-          ex: options.ttl,
+          EX: options.ttl,
         }
         : undefined,
     );
@@ -52,12 +51,12 @@ export class RedisStore implements ICacheStore {
   async delete(key: string): Promise<number> {
     const newKey = this.getNewKey(key);
     const result = await this.client.del(newKey);
-    await this.client.srem(this.key, key);
+    await this.client.sRem(this.key, key);
     this.timeoutMap.delete(key);
     return result;
   }
   async clear(): Promise<void> {
-    const keys = await this.client.smembers(this.key);
+    const keys = await this.client.sMembers(this.key);
     await this.client.del(this.key);
     await Promise.all(keys.map((key) => this.client.del(this.getNewKey(key))));
     for (const st of this.timeoutMap.values()) {
@@ -69,8 +68,8 @@ export class RedisStore implements ICacheStore {
     const num = await this.client.exists(newKey);
     return num === 1;
   }
-  size(): Promise<Integer> {
-    return this.client.scard(this.key);
+  size(): Promise<number> {
+    return this.client.sCard(this.key);
   }
 }
 

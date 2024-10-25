@@ -1,15 +1,15 @@
 import { type DynamicModule, Module, red, yellow } from "@nest/core";
-import { connect, type RedisConnectOptions } from "../deps.ts";
-import type { Redis } from "../deps.ts";
 import { REDIS_KEY } from "./redis.constant.ts";
 import { RedisService } from "./redis.service.ts";
 import { RedisStore } from "./redis.store.ts";
+import { createClient, type RedisClientOptions } from "redis";
+import type { Redis } from "../deps.ts";
 
 @Module({})
 export class RedisModule {
   static client: Redis;
 
-  static forRoot(db: RedisConnectOptions): DynamicModule {
+  static forRoot(db: RedisClientOptions): DynamicModule {
     return {
       module: RedisModule,
       providers: [
@@ -17,13 +17,10 @@ export class RedisModule {
           provide: REDIS_KEY,
           useFactory: async () => { // can be async
             try {
-              const client = await connect(db);
-              console.info(
-                "connect to redis success",
-                yellow(
-                  `hostname: ${db.hostname}, port: ${db.port}, database: ${db.db}`,
-                ),
-              );
+              const client = await createClient(db)
+                .on("error", (err) => console.log("Redis Client", err))
+                .connect();
+              console.info("connect to redis success");
               this.client = client;
               return client;
             } catch (e) {

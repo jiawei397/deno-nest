@@ -1,7 +1,8 @@
+import { createClient, type RedisClientOptions, type RedisClientType, type RedisFunctions, type RedisModules, type RedisScripts } from "redis";
+
+export type Redis = RedisClientType<RedisModules, RedisFunctions, RedisScripts>;
+
 export {
-  connect,
-  create,
-  createLazyClient,
-  type Redis,
-  type RedisConnectOptions,
-} from "redis";
+  createClient,
+  type RedisClientOptions,
+} 
