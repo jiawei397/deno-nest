@@ -6,7 +6,7 @@ export {
   type ICacheStore,
   md5,
   type Method,
-} from "https://deno.land/x/jwfetch@v1.2.0/mod.ts";
+} from "jwfetch";
 
 export {
   BadRequestException,
@@ -25,4 +25,4 @@ export type {
   Response,
 } from "@nest/core";
 
-export { nanoid } from "https://deno.land/x/nanoid@v3.0.0/mod.ts";
+export { nanoid } from "nanoid";
