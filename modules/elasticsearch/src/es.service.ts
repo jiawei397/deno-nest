@@ -1,11 +1,10 @@
-import { Client } from "../deps.ts";
 import { Inject, Injectable } from "@nest/core";
+import { Client, type ClientOptions } from "elasticsearch";
 import { ES_KEY } from "./es.constant.ts";
-import type { ElasticSearchOptions } from "./types.ts";
 
 @Injectable()
 export class ElasticsearchService extends Client {
-  constructor(@Inject(ES_KEY) options: ElasticSearchOptions) {
+  constructor(@Inject(ES_KEY) options: ClientOptions) {
     super(options);
   }
 }

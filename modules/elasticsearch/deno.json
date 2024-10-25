@@ -4,5 +4,8 @@
   "exports": "./mod.ts",
   "tasks": {
     "dev": "deno run --watch -A example/main.ts"
+  },
+  "imports": {
+    "elasticsearch": "npm:@elastic/elasticsearch@^8.15.1"
   }
 }

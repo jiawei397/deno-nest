@@ -1,11 +1,11 @@
+import { type DynamicModule, Module } from "@nest/core";
+import type { ClientOptions } from "elasticsearch";
 import { ES_KEY } from "./es.constant.ts";
 import { ElasticsearchService } from "./es.service.ts";
-import type { ElasticSearchOptions } from "./types.ts";
-import { type DynamicModule, Module } from "@nest/core";
 
 @Module({})
 export class ElasticsearchModule {
-  static forRoot(options: ElasticSearchOptions): DynamicModule {
+  static forRoot(options: ClientOptions): DynamicModule {
     return {
       module: ElasticsearchModule,
       providers: [{
