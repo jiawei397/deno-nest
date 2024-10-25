@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "exports": "./mod.ts",
   "imports": {
-    "@std/bdd": "jsr:@std/bdd@^1.0.0"
+    "@std/bdd": "jsr:@std/bdd@^1.0.0",
+    "@std/testing": "jsr:@std/testing@^1.0.0"
   }
 }
