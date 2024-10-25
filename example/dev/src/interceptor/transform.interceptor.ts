@@ -1,7 +1,4 @@
-import { Context, Injectable, Next } from "@nest/core";
-import type {
-  NestInterceptor,
-} from "../../../src/interfaces/interceptor.interface.ts";
+import { Context, Injectable, Next, type NestInterceptor } from "@nest/core";
 
 @Injectable()
 export class TransformInterceptor implements NestInterceptor {
