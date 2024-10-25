@@ -4,5 +4,8 @@
   "exports": "./mod.ts",
   "tasks": {
     "dev": "deno run --unstable -A example/main.ts"
+  },
+  "imports": {
+    "@zaubrik/djwt": "jsr:@zaubrik/djwt@^3.0.2"
   }
 }

@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post } from "@nest/core";
-import type { JwtService } from "@nest/jwt";
+// deno-lint-ignore verbatim-module-syntax
+import { JwtService } from "@nest/jwt";
 
 @Controller("")
 export class AppController {
