@@ -1,4 +1,4 @@
-import { cron } from "../deps.ts";
+import { cron } from "./cron.ts";
 import {
   type CronJob,
   schedulerRegistry,
@@ -42,7 +42,6 @@ export class ScheduleExplorer {
     }
     for (const [target, timeoutJobs] of schedulerRegistry.timeoutMap) {
       const instance = await Reflect.getMetadata(APP_CRON_INSTANCE, target);
-
       timeoutJobs.forEach((timeoutItem: TimeJob) => {
         const delay = timeoutItem.delay;
         const methodName = timeoutItem.methodName;
