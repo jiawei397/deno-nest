@@ -1,5 +1,6 @@
+// deno-lint-ignore-file verbatim-module-syntax
 import { Controller, Get, Inject, Query } from "@nest/core";
-import { type Client, POSTGRES_KEY } from "@nest/postgres";
+import { Client, POSTGRES_KEY } from "@nest/postgres";
 
 @Controller("")
 export class AppController {

@@ -1,5 +1,6 @@
+// deno-lint-ignore-file verbatim-module-syntax
 import { Injectable } from "@nest/core";
-import type { TestService } from "./test.service.ts";
+import { TestService } from "./test.service.ts";
 
 @Injectable()
 export class Test2Service {

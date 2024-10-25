@@ -13,8 +13,8 @@ import { Test2Service } from "./services/test2.service.ts";
       provide: "CONNECTION",
       useValue: "connected",
     },
-    ScheduleService,
     Test2Service,
+    ScheduleService,
   ],
 })
 export class AppModule {}

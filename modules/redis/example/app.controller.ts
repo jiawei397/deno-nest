@@ -1,6 +1,7 @@
+// deno-lint-ignore-file verbatim-module-syntax
 import { assert, Controller, Get, Inject, UseInterceptors } from "@nest/core";
 import { CacheInterceptor, SetCacheStore } from "@nest/cache";
-import { type Redis, REDIS_KEY, type RedisService } from "@nest/redis";
+import { Redis, REDIS_KEY, RedisService } from "@nest/redis";
 
 @Controller("")
 export class AppController {

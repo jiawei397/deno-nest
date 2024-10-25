@@ -1,3 +1,4 @@
+// deno-lint-ignore-file verbatim-module-syntax
 import {
   Controller,
   Get,
@@ -7,7 +8,7 @@ import {
   Res,
   type Response,
 } from "@nest/core";
-import type { AppService } from "./app.service.ts";
+import { AppService } from "./app.service.ts";
 import type { OakContext } from "@nest/oak";
 
 @Controller("")

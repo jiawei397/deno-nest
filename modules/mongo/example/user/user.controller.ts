@@ -1,3 +1,4 @@
+// deno-lint-ignore-file verbatim-module-syntax
 import {
   BadRequestException,
   Body,
@@ -6,8 +7,8 @@ import {
   Post,
   Query,
 } from "@nest/core";
-import type { UserService } from "./user.service.ts";
-import type { AddUserDto, SearchUserDto, UpdateUserDto } from "./user.dto.ts";
+import { UserService } from "./user.service.ts";
+import { AddUserDto, SearchUserDto, UpdateUserDto } from "./user.dto.ts";
 
 @Controller("/user")
 export class UserController {

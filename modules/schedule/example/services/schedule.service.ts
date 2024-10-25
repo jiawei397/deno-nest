@@ -1,3 +1,4 @@
+// deno-lint-ignore-file verbatim-module-syntax
 import { assert, Injectable } from "@nest/core";
 import {
   Cron,
@@ -6,7 +7,7 @@ import {
   schedulerRegistry,
   Timeout,
 } from "@nest/schedule";
-import type { TestService } from "./test.service.ts";
+import { TestService } from "./test.service.ts";
 
 @Injectable()
 export class ScheduleService {
@@ -16,8 +17,9 @@ export class ScheduleService {
 
   @Timeout(2000)
   onceJob() {
+    console.log('this.testService11');
     assert(this.testService, "testService is not defined");
-    console.log("-----once---", this.testService.info());
+    console.log("-----once111---", this.testService.info());
     setTimeout(() => { // this error only be catched by global error event listener
       throw new Error("once job error");
     }, 0);

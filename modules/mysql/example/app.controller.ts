@@ -1,5 +1,6 @@
+// deno-lint-ignore-file verbatim-module-syntax
 import { assert, Controller, Get, Inject, Query } from "@nest/core";
-import { type Client, MYSQL_KEY } from "@nest/mysql";
+import { Client, MYSQL_KEY } from "@nest/mysql";
 
 @Controller("")
 export class AppController {

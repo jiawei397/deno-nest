@@ -68,8 +68,14 @@ const isMatched = (date: Date, timeFlag: string, type: TIME_PART): boolean => {
 };
  
 const validate = (schedule: string, date: Date = new Date()) => {
-    // @ts-ignore
-    const timeObj: Record<TIME_PART, boolean> = {};
+    const timeObj: Record<TIME_PART, boolean> = {
+      [TIME_PART.SECOND]: false,
+      [TIME_PART.MINUTE]: false,
+      [TIME_PART.HOUR]: false,
+      [TIME_PART.DAY_OF_WEEK]: false,
+      [TIME_PART.DAY_OF_MONTH]: false,
+      [TIME_PART.MONTH]: false
+    };
 
     const [
         dayOfWeek,

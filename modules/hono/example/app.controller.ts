@@ -1,3 +1,4 @@
+// deno-lint-ignore-file verbatim-module-syntax
 import {
   BadGatewayException,
   Body,
@@ -10,8 +11,8 @@ import {
   Res,
   type Response,
 } from "@nest/core";
-import type { AppService } from "./app.service.ts";
-import type { QueryDto, QueryWithoutPropDto, SaveDto } from "./app.dto.ts";
+import { AppService } from "./app.service.ts";
+import { QueryDto, QueryWithoutPropDto, SaveDto } from "./app.dto.ts";
 import type { HonoContext } from "@nest/hono";
 
 @Controller("")

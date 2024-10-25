@@ -7,6 +7,7 @@ export class TestService {
   constructor(@Inject("CONNECTION") private readonly connection: string) {
     assert(this.connection === "connected", 'connection is not "connected"');
     num++;
+    console.log("TestService111", num, this.info());
     assert(num <= 1, "init once");
   }
 
