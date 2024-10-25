@@ -41,7 +41,7 @@ async function downloadUrl(url: string, fileName: string) {
 }
 
 async function downloadGit(url: string, dest: string) {
-  const gitclone = await import("npm:git-clone");
+  const gitclone = await import("npm:git-clone@0.2.0");
   return new Promise((resolve, reject) => {
     gitclone.default(
       url,
