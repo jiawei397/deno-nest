@@ -27,4 +27,4 @@ export {
   Max,
   Min,
   validateOrReject,
-} from "https://deno.land/x/deno_class_validator@v1.0.0/mod.ts";
+} from "@nest/core";

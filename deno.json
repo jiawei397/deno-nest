@@ -53,7 +53,7 @@
     "@std/fmt": "jsr:@std/fmt@^1.0.2",
     "@std/http": "jsr:@std/http@^1.0.8",
     "@std/path": "jsr:@std/path@^1.0.6",
-    "class_validator": "https://deno.land/x/deno_class_validator@v1.0.0/mod.ts",
+    "class_validator": "npm:class-validator@^0.14",
     "oak": "https://deno.land/x/oak@v17.1.0/mod.ts"
   },
   "workspace": [
