@@ -25,7 +25,7 @@ import type {
 } from "./cache.interface.ts";
 import { KVStore, LocalStore, MemoryStore } from "./cache.store.ts";
 import { md5 } from "./cache.utils.ts";
-import { LRUCache } from "../deps.ts";
+import { LRUCache } from "lru-cache";
 import type { OnModuleInit } from "../../../src/interfaces/module.interface.ts";
 
 export function CacheTTL(

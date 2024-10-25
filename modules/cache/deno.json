@@ -4,5 +4,10 @@
   "exports": "./mod.ts",
   "tasks": {
     "dev": "deno run --unstable-kv -A example/main.ts"
+  },
+  "imports": {
+    "lru-cache": "npm:lru-cache@^10.0.3",
+    "@std/encoding": "jsr:@std/encoding@^1.0.5",
+    "@takker/md5": "jsr:@takker/md5@^0.1.0"
   }
 }
