@@ -1,5 +1,4 @@
-import { Module } from "../../../src/decorators/module.ts";
-import type { DynamicModule } from "../../../src/interfaces/module.interface.ts";
+import { Module, type DynamicModule } from "@nest/core";
 import { optionKey } from "./cache.constant.ts";
 import { CacheInterceptor } from "./cache.interceptor.ts";
 import type { CacheModuleOptions } from "./cache.interface.ts";

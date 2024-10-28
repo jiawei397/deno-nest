@@ -4,8 +4,7 @@ import {
   schedulerRegistry,
   type TimeJob,
 } from "./scheduler.registry.ts";
-import { Reflect } from "../../../src/deps.ts";
-import { APP_CRON_INSTANCE } from "../../../src/constants.ts";
+import { Reflect, APP_CRON_INSTANCE } from "@nest/core";
 
 export class ScheduleExplorer {
   onModuleInit() {

@@ -1,15 +1,11 @@
-import type {
-  Request,
-  Response,
-} from "../../../src/interfaces/context.interface.ts";
-import type { Next } from "../../../src/interfaces/middleware.interface.ts";
+import type { Next, Request, Response } from "@nest/core";
 import {
   assertEquals,
   beforeEach,
+  createMockContext,
   describe,
   it,
-} from "../../../tests/test_deps.ts";
-import { createMockContext } from "../../../tests/common_helper.ts";
+} from "@nest/tests";
 import { CORS, defaults } from "./main.ts";
 
 describe("cors", () => {

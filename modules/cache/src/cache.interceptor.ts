@@ -7,6 +7,7 @@ import {
   type NestInterceptor,
   type NestInterceptorOptions,
   type Next,
+  type OnModuleInit,
   Reflect,
 } from "@nest/core";
 import {
@@ -26,7 +27,6 @@ import type {
 import { KVStore, LocalStore, MemoryStore } from "./cache.store.ts";
 import { md5 } from "./cache.utils.ts";
 import { LRUCache } from "lru-cache";
-import type { OnModuleInit } from "../../../src/interfaces/module.interface.ts";
 
 export function CacheTTL(
   seconds: number,
