@@ -1,20 +1,24 @@
 // deno-lint-ignore-file no-unused-vars require-await no-explicit-any
-import { Controller, Get } from "../src/decorators/controller.ts";
-import { Injectable } from "../src/decorators/inject.ts";
+import {
+  Catch,
+  Controller,
+  Get,
+  Injectable,
+  Module,
+  Scope,
+  UseFilters,
+  UseGuards,
+  UseInterceptors,
+} from "@nest/core";
 import { assert, assertEquals } from "./test_deps.ts";
 import { createTestingModule } from "./test.module.ts";
-import type { CanActivate } from "../src/interfaces/guard.interface.ts";
-import type { Context } from "../src/interfaces/context.interface.ts";
-import { UseGuards } from "../src/guard.ts";
-import type { ExceptionFilter } from "../src/interfaces/filter.interface.ts";
-import { Catch, UseFilters } from "../src/filter.ts";
-import { Scope } from "../src/interfaces/scope-options.interface.ts";
-import type { NestInterceptor } from "../src/interfaces/interceptor.interface.ts";
-import type { Next } from "../src/interfaces/middleware.interface.ts";
-import type { APP_INTERCEPTOR } from "../src/constants.ts";
-import { UseInterceptors } from "../src/interceptor.ts";
-import type { DynamicModule } from "../src/interfaces/module.interface.ts";
-import { Module } from "../src/decorators/module.ts";
+import type {
+  CanActivate,
+  Context,
+  ExceptionFilter,
+  NestInterceptor,
+  Next,
+} from "@nest/core";
 
 @Injectable()
 class B {

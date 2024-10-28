@@ -5,7 +5,9 @@ import {
   Patch,
   Post,
   Put,
-} from "../src/decorators/controller.ts";
+  Res,
+  type Response,
+} from "@nest/core";
 import {
   assertEquals,
   assertNotEquals,
@@ -20,8 +22,6 @@ import {
   mockCallMethod,
   type MockOptions,
 } from "./common_helper.ts";
-import type { Response } from "../src/interfaces/context.interface.ts";
-import { Res } from "../src/decorators/method.ts";
 
 Deno.test("findUnusedPort", async () => {
   const port1 = 4000;
