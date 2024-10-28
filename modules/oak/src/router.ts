@@ -95,11 +95,6 @@ export class OakRouter implements IRouter {
   }
 
   startServer(options: ListenOptions): Promise<void> {
-    options.onListen!({
-      transport: "tcp",
-      port: options?.port ?? 8000,
-      hostname: options?.hostname ?? "localhost",
-    });
     return this.app.listen(options).catch((err) => {
       const errorCallback = options?.onError;
       if (errorCallback) {

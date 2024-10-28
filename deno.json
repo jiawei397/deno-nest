@@ -47,7 +47,6 @@
     "strictPropertyInitialization": false
   },
   "imports": {
-    "oak": "jsr:@oak/oak@^17.1.2",
     "@std/assert": "jsr:@std/assert@^1.0.6",
     "@std/async": "jsr:@std/async@^1.0.6",
     "@std/datetime": "jsr:@std/datetime@^0.225.2",

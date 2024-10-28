@@ -1,9 +1,12 @@
 {
   "name": "@nest/oak",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "exports": "./mod.ts",
   "tasks": {
     "dev": "deno run --watch -A example/main.ts",
     "start": "deno run -A example/main.ts"
+  },
+  "imports": {
+    "oak": "jsr:@oak/oak@^17.1.2"
   }
 }
