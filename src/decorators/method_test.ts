@@ -9,12 +9,10 @@ import {
   IsString,
   Max,
   Min,
-} from "../../tests/test_deps.ts";
-import {
   createMockApp,
   createMockContext,
   mockCallMethod,
-} from "../../tests/common_helper.ts";
+} from "@nest/tests";
 import { Controller, Get, Post } from "./controller.ts";
 import {
   Body,
