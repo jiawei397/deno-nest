@@ -1,6 +1,5 @@
-// deno-lint-ignore-file verbatim-module-syntax
 import { assert, Controller, Get, Inject, Query } from "@nest/core";
-import { Client, MYSQL_KEY } from "@nest/mysql";
+import { type Client, MYSQL_KEY } from "@nest/mysql";
 
 @Controller("")
 export class AppController {
@@ -49,5 +48,12 @@ export class AppController {
     );
     console.log(result);
     return result;
+  }
+
+  @Get('list')
+  async list() {
+    const result = await this.client.query(`select * from users`);
+    console.log(result);
+    return result[0];
   }
 }

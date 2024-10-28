@@ -1,41 +1,36 @@
-import { type DynamicModule, Module, red, yellow } from "@nest/core";
-import { Client, type ClientConfig } from "../deps.ts";
+import { type DynamicModule, Module, red } from "@nest/core";
 import { MYSQL_KEY } from "./mysql.constant.ts";
+import {
+  type Connection,
+  type ConnectionOptions,
+  createConnection,
+} from "mysql/promise";
 
 @Module({})
 export class MysqlModule {
-  static client: Client;
+  static client: Connection;
 
-  static forRoot(config: ClientConfig): DynamicModule {
+  static forRoot(config: ConnectionOptions): DynamicModule {
     return {
       module: MysqlModule,
       providers: [{
         provide: MYSQL_KEY,
         useFactory: async () => { // can be async
+          const { database, ...others } = config;
           try {
-            const { db, ...otherConfig } = config;
-            const client = new Client();
-            if (db) {
-              await client.connect(otherConfig);
-              await client.execute(`CREATE DATABASE IF NOT EXISTS ${db}`);
-              await client.execute(`USE ${db}`);
-              console.info(
-                "connect to mysql success",
-                yellow(
-                  `hostname: ${config.hostname}, username: ${config.username}, database: ${db}`,
-                ),
+            const connection = await createConnection(
+              database ? others : config,
+            );
+            console.info("connect to mysql success");
+            if (database) {
+              await connection.query(
+                `CREATE DATABASE IF NOT EXISTS ${database}`,
               );
-            } else {
-              await client.connect(config);
-              console.info(
-                "connect to mysql success",
-                yellow(
-                  `hostname: ${config.hostname}, username: ${config.username}`,
-                ),
-              );
+              await connection.query(`USE ${database}`);
+              console.debug("create database success");
             }
-            this.client = client;
-            return client;
+            this.client = connection;
+            return connection;
           } catch (e) {
             console.error(
               "connect to mysql error",
@@ -49,7 +44,7 @@ export class MysqlModule {
     };
   }
 
-  static getClient(): Client {
+  static getClient(): Connection {
     return this.client;
   }
 }

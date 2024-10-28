@@ -5,11 +5,11 @@ import { AppController } from "./app.controller.ts";
 @Module({
   imports: [
     MysqlModule.forRoot({
-      hostname: "localhost",
-      username: "root",
+      host: "10.100.30.65",
+      user: "root",
       port: 3306,
-      db: "test",
-      poolSize: 3, // connection limit
+      database: "test",
+      pool: 3, // connection limit
       password: "123456",
     }),
   ],

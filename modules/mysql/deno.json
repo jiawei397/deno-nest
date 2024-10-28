@@ -6,6 +6,6 @@
     "dev": "deno run --watch -A example/main.ts"
   },
   "imports": {
-    "mysql": "https://deno.land/x/mysql@v2.11.0/mod.ts"
+    "mysql": "npm:mysql2@^3.11.3"
   }
 }
