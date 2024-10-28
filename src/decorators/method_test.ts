@@ -672,7 +672,7 @@ Deno.test("transAndValidateByCls", async (t) => {
     } catch (error) {
       assertEquals(
         (error as Error).message,
-        "status must be a valid enum value",
+        "status must be one of the following values: 0, 1",
       );
     }
   });

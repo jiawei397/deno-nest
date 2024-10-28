@@ -10,17 +10,21 @@ name: Deno
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+     
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - name: Setup repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Deno
         uses: denoland/setup-deno@v2
@@ -44,3 +48,6 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           files: cov.lcov
+
+      - name: Publish package
+        run: deno publish
