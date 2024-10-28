@@ -3,16 +3,16 @@ import { OakRouter } from "./router.ts";
 
 Deno.test("OakRouter startServer error", async (t) => {
   const router = new OakRouter();
+  const callStacks: number[] = [];
   // deno-lint-ignore no-explicit-any
   const app = (router as any).app;
-  // deno-lint-ignore require-await
-  app.listen = async () => {
-    throw new Error("listen");
-  };
 
   await t.step("with onError", async () => {
-    const callStacks: number[] = [];
-
+    // deno-lint-ignore require-await
+    app.listen = async () => {
+      callStacks.push(0);
+      throw new Error("listen");
+    };
     await router.startServer({
       onListen: () => {
         callStacks.push(1);
@@ -24,18 +24,22 @@ Deno.test("OakRouter startServer error", async (t) => {
       },
     });
 
-    assertEquals(callStacks, [1, 2]);
+    assertEquals(callStacks, [0, 2]);
+
+    callStacks.length = 0;
   });
 
   await t.step("without onError", async () => {
-    const callStacks: number[] = [];
-
+    // deno-lint-ignore require-await
+    app.listen = async () => {
+      callStacks.push(0);
+    };
     await router.startServer({
       onListen: () => {
         callStacks.push(1);
       },
     });
 
-    assertEquals(callStacks, [1]);
+    assertEquals(callStacks, [0]);
   });
 });
