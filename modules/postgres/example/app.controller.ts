@@ -1,15 +1,22 @@
-// deno-lint-ignore-file verbatim-module-syntax
 import { Controller, Get, Inject, Query } from "@nest/core";
-import { Client, POSTGRES_KEY } from "@nest/postgres";
+import { type Sql, POSTGRES_KEY } from "@nest/postgres";
+
+type Company = {
+  id: number;
+  name: string;
+  age: number;
+  address: string;
+  salary: number;
+};
 
 @Controller("")
 export class AppController {
-  constructor(@Inject(POSTGRES_KEY) private readonly client: Client) {}
+  constructor(@Inject(POSTGRES_KEY) private readonly sql: Sql) {}
 
   @Get("/createCompanyTable")
   async createCompanyTable() {
-    await this.client.queryArray(`DROP TABLE IF EXISTS COMPANY`);
-    const result = await this.client.queryObject(`
+    await this.sql`DROP TABLE IF EXISTS COMPANY`;
+    const result = await this.sql`
       CREATE TABLE COMPANY(
         ID INT PRIMARY KEY     NOT NULL,
         NAME           TEXT    NOT NULL,
@@ -17,7 +24,7 @@ export class AppController {
         ADDRESS        CHAR(50),
         SALARY         REAL
     );
-    `);
+    `;
     return result;
   }
 
@@ -26,9 +33,9 @@ export class AppController {
     @Query("username") username: string,
     @Query("id") id: number,
   ) {
-    const result = await this.client.queryObject(
-      `INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (${id}, '${username}', 32, 'California', 20000.00)`,
-    );
+    console.info("Creating company " + username, 'with id', id);
+    const result = await this
+      .sql`INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (${id}, ${username}, 32, 'California', 20000.00)`;
     console.log(result);
     return result;
   }
@@ -36,10 +43,24 @@ export class AppController {
   @Get("/updateCompany")
   async updateCompany(@Query("id") id: number) {
     console.info("Updating company " + id);
-    const result = await this.client.queryArray(
-      `UPDATE COMPANY SET SALARY = 15000 WHERE ID = ${id}`,
-    );
+    const result = await this
+      .sql`UPDATE COMPANY SET SALARY = 15000 WHERE ID = ${id}`;
     console.log(result);
-    return result.rowCount;
+    return result;
+  }
+
+  @Get('/queryCompany')
+  async queryCompany(@Query("id") id: number) {
+    console.info("Query company " + id);
+    const result = await this.sql`SELECT * FROM COMPANY WHERE ID = ${id}`;
+    console.log(result);
+    return result;
+  }
+
+  @Get('list')
+  async list() {
+    const result = await this.sql<Company[]>`SELECT * FROM COMPANY`;
+    console.log(result);
+    return result;
   }
 }

@@ -6,6 +6,6 @@
     "dev": "deno run --watch -A example/main.ts"
   },
   "imports": {
-    "postgres/": "https://deno.land/x/postgres@v0.17.0/"
+    "postgres": "npm:postgres@^3.4.5"
   }
 }

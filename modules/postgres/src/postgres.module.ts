@@ -1,42 +1,34 @@
-import { type DynamicModule, Module, red, yellow } from "@nest/core";
-import { Client, type ClientOptions, type ConnectionString } from "../deps.ts";
+import { type DynamicModule, Module, red } from "@nest/core";
+import postgres, { type Options, type Sql } from "postgres";
 import { POSTGRES_KEY } from "./postgres.constant.ts";
 
 @Module({})
 export class PostgresModule {
-  static client: Client;
+  static sql: Sql;
 
-  static forRoot(config: ClientOptions | ConnectionString): DynamicModule {
+  // deno-lint-ignore no-explicit-any
+  static forRoot(config: Options<any>): DynamicModule {
     return {
       module: PostgresModule,
       providers: [
         {
           provide: POSTGRES_KEY,
-          useFactory: async () => { // can be async
+          useFactory: async () => { 
+            const sql = postgres(config);
             try {
-              const client = new Client(config);
-              await client.connect();
-              const url = typeof config === "string"
-                ? config
-                : `hostname: ${config.hostname}, username: ${config.user}, database: ${config.database}`;
-              console.info("connect to postgres success", yellow(url));
-              this.client = client;
-              return client;
-            } catch (e) {
-              console.error(
-                "connect to postgres error",
-                red((e as Error).stack || e as string),
-              );
+              await sql`SELECT 1 AS connected`;
+              console.log('connected to postgres successfully');
+              this.sql = sql;
+            } catch (error) {
+              console.error("connect postgres", error);
+              sql.end();
             }
+            return sql;
           },
         },
       ],
       exports: [POSTGRES_KEY],
       global: true,
     };
-  }
-
-  static getClient(): Client {
-    return this.client;
   }
 }
