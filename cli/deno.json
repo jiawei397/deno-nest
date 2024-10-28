@@ -1,6 +1,6 @@
 {
   "name": "@nest/cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "exports": "./main.ts",
   "tasks": {
     "install": "deno install -g --allow-env --allow-run --allow-net --allow-read --allow-write -n nests  -f ./main.ts"

@@ -1,7 +1,4 @@
-import { applyEdits, modify, decompress, path} from "../deps.ts";
-import denoConfig from "../../deno.json" with { type: "json" };
-
-const importMap = denoConfig.imports;
+import { applyEdits, decompress, modify, path } from "../deps.ts";
 
 const projectName = "deno_nest_template";
 const branchName = "main";
@@ -86,14 +83,21 @@ function modifyText(text: string, map: Record<string, string>) {
   }, text);
 }
 
-async function writeDenoJson(name: string, denoJsonPath: string) {
+async function writeDenoJson(
+  name: string,
+  denoJsonPath: string,
+  engine: Engine,
+) {
   //   console.log(`[${denoJsonPath}] will be changed`);
   const realPath = path.join(name, denoJsonPath);
   let text = await Deno.readTextFile(realPath);
   text = text.replace(templateName, name);
-  const result = modifyText(text, {
+  let result = modifyText(text, {
     name,
   });
+  if (engine === "oak") {
+    result = result.replaceAll("hono", "oak");
+  }
   await Deno.writeTextFile(realPath, result);
 }
 
@@ -108,25 +112,10 @@ async function writeReadme(name: string) {
   await Deno.writeTextFile(realPath, newDoc);
 }
 
-// 读取import_map.json文件，替换hono为oak
-async function writeImportMap(name: string) {
-  const realPath = path.join(name, "import_map.json");
-  const content = await Deno.readTextFile(realPath);
-  // "@nest/hono": "https://deno.land/x/deno_nest@v3.1.1/modules/hono/mod.ts",
-  // "hono/": "https://deno.land/x/hono@v4.1.0/",
-  const newContent = content.replace(/\"hono\/\"/, `"oak"`).replaceAll(
-    "hono",
-    "oak",
-  );
-  const json = JSON.parse(newContent);
-  json.imports["oak"] = importMap.oak;
-  await Deno.writeTextFile(realPath, JSON.stringify(json, null, 2));
-}
-
 async function writeMain(name: string) {
   const realPath = path.join(name, "src/main.ts");
   const content = await Deno.readTextFile(realPath);
-  const newContent = content.replace(/@nest\/hono/g, "@nest/oak");
+  const newContent = content.replaceAll("hono", "oak");
   await Deno.writeTextFile(realPath, newContent);
 }
 
@@ -143,9 +132,8 @@ export async function createProject(
   }
 
   await writeReadme(name);
-  await writeDenoJson(name, "deno.jsonc");
+  await writeDenoJson(name, "deno.jsonc", engine);
   if (engine === "oak") {
-    await writeImportMap(name);
     await writeMain(name);
   }
 
