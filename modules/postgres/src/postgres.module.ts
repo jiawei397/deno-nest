@@ -1,4 +1,4 @@
-import { type DynamicModule, Module, red } from "@nest/core";
+import { type DynamicModule, Module } from "@nest/core";
 import postgres, { type Options, type Sql } from "postgres";
 import { POSTGRES_KEY } from "./postgres.constant.ts";
 

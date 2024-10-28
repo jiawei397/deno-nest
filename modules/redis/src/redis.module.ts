@@ -1,4 +1,4 @@
-import { type DynamicModule, Module, red, yellow } from "@nest/core";
+import { type DynamicModule, Module, red } from "@nest/core";
 import { REDIS_KEY } from "./redis.constant.ts";
 import { RedisService } from "./redis.service.ts";
 import { RedisStore } from "./redis.store.ts";
