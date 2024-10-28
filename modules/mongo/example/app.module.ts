@@ -4,7 +4,7 @@ import { UserModule } from "./user/user.module.ts";
 
 @Module({
   imports: [
-    MongoModule.forRoot("mongodb://10.100.30.65:27018/test"),
+    MongoModule.forRoot("mongodb://root:123456@192.168.21.125:27017/test?authSource=admin"),
     UserModule,
   ],
   controllers: [],

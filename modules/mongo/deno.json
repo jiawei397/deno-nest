@@ -6,6 +6,6 @@
     "dev": "deno run --watch -A example/main.ts"
   },
   "imports": {
-    "deno_mongo_schema": "https://deno.land/x/deno_mongo_schema@v1.0.3/mod.ts"
+    "deno_mongo_schema": "jsr:@jw397/mongo-schema@^2.0.1"
   }
 }

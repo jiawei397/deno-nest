@@ -14,6 +14,21 @@ import { AddUserDto, SearchUserDto, UpdateUserDto } from "./user.dto.ts";
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  /**
+   * @example
+   * ```ts
+   * fetch('/api/user/add', {
+   *  method: 'POST',
+   *  headers: {
+   *   'Content-Type': 'application/json'
+   * },
+   * body: JSON.stringify({
+   *  username: 'test',
+   *  email: 'test@xx.com'
+   * })
+   * })
+   * ```
+   */
   @Post("add")
   add(@Body() params: AddUserDto) {
     return this.userService.save(params);
