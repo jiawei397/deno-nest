@@ -1,4 +1,4 @@
-import { colors, Command, fs, Input, Select } from "../deps.ts";
+import { colors, Command, fs, Input, Select, path } from "../deps.ts";
 import {
   getController,
   getDecorator,
@@ -52,11 +52,12 @@ function calculateBytesAndKb(str: string) {
 
 export async function generate(type: GenerateType, name: string) {
   const dirname = getLowerCaseFileName(name);
-  await fs.ensureDir(dirname);
+  const dirpath = path.join('src', dirname);
+  await fs.ensureDir(dirpath);
   const body = getGenerateBody(type, name);
   const fileName = getFileName(name, type);
 
-  const filePath = `${dirname}/${fileName}`;
+  const filePath = path.join(dirpath, fileName);
   await Deno.writeTextFile(filePath, body);
   console.info(info("CREATE"), `${filePath} (${calculateBytesAndKb(body)})`);
 }
