@@ -28,9 +28,12 @@ import { AppController } from "./app.controller.ts";
 @Module({
   imports: [
     RedisModule.forRoot({
-      port: 6379,
-      hostname: "192.168.21.176",
-      password: "123456",
+      url: "redis://default:xxx@10.100.30.65:6379/1",
+    }),
+    CacheModule.register({
+      ttl: 30,
+      store: createStore,
+      isDebug: true,
     }),
   ],
   controllers: [AppController],
