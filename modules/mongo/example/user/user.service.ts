@@ -1,6 +1,6 @@
 // deno-lint-ignore-file verbatim-module-syntax
 import { Injectable } from "@nest/core";
-import { InjectModel, type Model } from "deno_mongo_schema";
+import { InjectModel, type Model } from "@nest/mongo";
 import { User } from "./user.schema.ts";
 import { AddUserDto } from "./user.dto.ts";
 

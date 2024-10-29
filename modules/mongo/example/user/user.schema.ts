@@ -1,4 +1,4 @@
-import { BaseSchema, Prop, Schema } from "deno_mongo_schema";
+import { BaseSchema, Prop, Schema } from "@nest/mongo";
 
 @Schema()
 export class User extends BaseSchema {
