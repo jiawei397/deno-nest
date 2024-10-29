@@ -1,8 +1,7 @@
-# nest_postgres_module
+# @nest/postgres
 
-This is a Postgres module for [`deno_nest`](https://deno.land/x/deno_nest).
-Currently used Postgres client is <https://deno.land/x/postgres@v0.17.0/mod.ts>
-which the docs is <https://deno-postgres.com/>.
+This is a Postgres module for [`deno_nest`](https://nests.deno.dev/en-US).
+Currently used Postgres client is [npm:postgres@^3.4.5](https://www.npmjs.com/package/postgres).
 
 If you want to use another Postgres client, you can refer to the code for this
 module, there are not many lines.
@@ -14,11 +13,9 @@ Add import map in `deno.json`:
 ```json
 {
   "imports": {
-    "@nest": "https://deno.land/x/deno_nest@v3.15.0/mod.ts",
-    "@nest/hono": "https://deno.land/x/deno_nest@v3.15.0/modules/hono/mod.ts",
-    "@nest/postgres": "https://deno.land/x/deno_nest@v3.15.0/modules/postgres/mod.ts",
-    "hono/": "https://deno.land/x/hono@v4.1.0/",
-    "postgres/": "https://deno.land/x/postgres@v0.17.0/"
+    "@nest/core": "jsr:@nest/core@^0.0.1",
+    "@nest/hono": "jsr:@nest/hono@^0.0.1",
+    "@nest/postgres": "jsr:@nest/postgres@^0.0.2"
   }
 }
 ```
@@ -35,11 +32,14 @@ import { AppController } from "./app.controller.ts";
 @Module({
   imports: [
     PostgresModule.forRoot({
-      hostname: "localhost",
-      port: "5432",
+      hostname: "10.100.30.65",
+      port: 5433,
+      max: 20,
+      debug: true,
       user: "root",
+      connect_timeout: 5,
       database: "database", // You must ensure that the database exists, and the program will not automatically create it
-      password: "yourpassword", // One thing that must be taken into consideration is that passwords contained inside the URL must be properly encoded in order to be passed down to the database. You can achieve that by using the JavaScript API encodeURIComponent and passing your password as an argument.
+      password: "uinnova2022", // One thing that must be taken into consideration is that passwords contained inside the URL must be properly encoded in order to be passed down to the database. You can achieve that by using the JavaScript API encodeURIComponent and passing your password as an argument.
     }),
   ],
   controllers: [AppController],
@@ -51,16 +51,24 @@ Then can be used in AppController:
 
 ```ts
 import { Controller, Get, Inject, Query } from "@nest/core";
-import { Client, POSTGRES_KEY } from "@nest/postgres";
+import { type Sql, POSTGRES_KEY } from "@nest/postgres";
+
+type Company = {
+  id: number;
+  name: string;
+  age: number;
+  address: string;
+  salary: number;
+};
 
 @Controller("")
 export class AppController {
-  constructor(@Inject(POSTGRES_KEY) private readonly client: Client) {}
+  constructor(@Inject(POSTGRES_KEY) private readonly sql: Sql) {}
 
   @Get("/createCompanyTable")
   async createCompanyTable() {
-    await this.client.queryArray(`DROP TABLE IF EXISTS COMPANY`);
-    const result = await this.client.queryObject(`
+    await this.sql`DROP TABLE IF EXISTS COMPANY`;
+    const result = await this.sql`
       CREATE TABLE COMPANY(
         ID INT PRIMARY KEY     NOT NULL,
         NAME           TEXT    NOT NULL,
@@ -68,7 +76,7 @@ export class AppController {
         ADDRESS        CHAR(50),
         SALARY         REAL
     );
-    `);
+    `;
     return result;
   }
 
@@ -77,9 +85,9 @@ export class AppController {
     @Query("username") username: string,
     @Query("id") id: number,
   ) {
-    const result = await this.client.queryObject(
-      `INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (${id}, '${username}', 32, 'California', 20000.00)`,
-    );
+    console.info("Creating company " + username, 'with id', id);
+    const result = await this
+      .sql`INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (${id}, ${username}, 32, 'California', 20000.00)`;
     console.log(result);
     return result;
   }
@@ -87,11 +95,25 @@ export class AppController {
   @Get("/updateCompany")
   async updateCompany(@Query("id") id: number) {
     console.info("Updating company " + id);
-    const result = await this.client.queryArray(
-      `UPDATE COMPANY SET SALARY = 15000 WHERE ID = ${id}`,
-    );
+    const result = await this
+      .sql`UPDATE COMPANY SET SALARY = 15000 WHERE ID = ${id}`;
     console.log(result);
-    return result.rowCount;
+    return result;
+  }
+
+  @Get('/queryCompany')
+  async queryCompany(@Query("id") id: number) {
+    console.info("Query company " + id);
+    const result = await this.sql`SELECT * FROM COMPANY WHERE ID = ${id}`;
+    console.log(result);
+    return result;
+  }
+
+  @Get('list')
+  async list() {
+    const result = await this.sql<Company[]>`SELECT * FROM COMPANY`;
+    console.log(result);
+    return result;
   }
 }
 ```

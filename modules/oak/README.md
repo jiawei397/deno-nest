@@ -1,6 +1,6 @@
-# nest_oak
+# @nest/oak
 
-This is a `oak` module for [`deno_nest`](https://deno.land/x/deno_nest).
+This is a [oak](https://github.com/oakserver/oak) module for [`deno_nest`](https://nests.deno.dev/en-US).
 
 ## example
 
@@ -9,16 +9,11 @@ Add import map in `deno.json`:
 ```json
 {
   "imports": {
-    "@nest": "https://deno.land/x/deno_nest@v3.15.0/mod.ts",
-    "@nest/hono": "https://deno.land/x/deno_nest@v3.15.0/modules/hono/mod.ts",
-    "oak": "https://deno.land/x/oak@v12.6.1/mod.ts",
-    "class_validator": "https://deno.land/x/deno_class_validator@v1.0.0/mod.ts"
+    "@nest/core": "jsr:@nest/core@^0.0.1",
+    "@nest/oak": "jsr:@nest/oak@^0.0.1",
   }
 }
 ```
-
-You can change the `oak` version for yourself, but the safest use is to use the
-version recommended by Nest, as it has undergone thorough unit testing.
 
 app.module.ts:
 

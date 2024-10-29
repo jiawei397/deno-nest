@@ -1,6 +1,6 @@
-# nest_mongo_module
+# @nest/mongo
 
-This is a `mongodb` module for [`deno_nest`](https://deno.land/x/deno_nest).
+This is a `mongodb` module for [`deno_nest`](https://nests.deno.dev/en-US).
 
 ## example
 
@@ -9,17 +9,12 @@ Add import map in `deno.json`:
 ```json
 {
   "imports": {
-    "@nest": "https://deno.land/x/deno_nest@v3.15.0/mod.ts",
-    "@nest/hono": "https://deno.land/x/deno_nest@v3.15.0/modules/hono/mod.ts",
-    "@nest/mongo": "https://deno.land/x/deno_nest@v3.15.0/modules/mongo/mod.ts",
-    "hono/": "https://deno.land/x/hono@v4.1.0/",
-    "deno_mongo_schema": "https://deno.land/x/deno_mongo_schema@v1.0.3/mod.ts",
-    "class_validator": "https://deno.land/x/deno_class_validator@v1.0.0/mod.ts"
+    "@nest/core": "jsr:@nest/core@^0.0.1",
+    "@nest/hono": "jsr:@nest/hono@^0.0.1",
+    "@nest/mongo": "jsr:@nest/mongo@^0.0.1"
   }
 }
 ```
-
-You can change the `deno_mongo_schema` version for yourself.
 
 app.module.ts:
 
@@ -30,7 +25,7 @@ import { UserModule } from "./user/user.module.ts";
 
 @Module({
   imports: [
-    MongoModule.forRoot("mongodb://10.100.30.65:27018/test"),
+    MongoModule.forRoot("mongodb://localhost:27017/test"),
     UserModule,
   ],
   controllers: [],

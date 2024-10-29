@@ -1,6 +1,7 @@
-# nest_redis_module
+# @nest/redis
 
-This is a redis module for [`deno_nest`](https://deno.land/x/deno_nest).
+This is a redis module for [`deno_nest`](https://nests.deno.dev/en-US).
+The default redis client is `npm:@redis/client@^1`.
 
 ## example
 
@@ -9,11 +10,9 @@ Add import map in `deno.json`:
 ```json
 {
   "imports": {
-    "@nest": "https://deno.land/x/deno_nest@v3.15.0/mod.ts",
-    "@nest/hono": "https://deno.land/x/deno_nest@v3.15.0/modules/hono/mod.ts",
-    "@nest/redis": "https://deno.land/x/deno_nest@v3.15.0/modules/redis/mod.ts",
-    "hono/": "https://deno.land/x/hono@v4.1.0/",
-    "redis": "https://deno.land/x/redis@v0.29.3/mod.ts"
+    "@nest/core": "jsr:@nest/core@^0.0.1",
+    "@nest/hono": "jsr:@nest/hono@^0.0.1",
+    "@nest/redis": "jsr:@nest/redis@^0.0.2",
   }
 }
 ```

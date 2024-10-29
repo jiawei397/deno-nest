@@ -23,7 +23,7 @@ function getDefaultErrorBody(
  * An ExceptionFilter that will deal the exceptions when called.
  *
  * ```ts
- * import { anyExceptionFilter } from "https://deno.land/x/deno_nest/modules/uinv/mod.ts";
+ * import { anyExceptionFilter } from "@nest/uinv";
  *
  * app.useGlobalFilters(anyExceptionFilter({
  *  logger: console,

@@ -1,6 +1,6 @@
-# nest_schedule_module
+# @nest/schedule
 
-This is a `schedule` module for [`deno_nest`](https://deno.land/x/deno_nest).
+This is a `schedule` module for [`deno_nest`](https://nests.deno.dev/en-US).
 
 ## example
 
@@ -9,10 +9,9 @@ Add import map in `deno.json`:
 ```json
 {
   "imports": {
-    "@nest": "https://deno.land/x/deno_nest@v3.15.0/mod.ts",
-    "@nest/hono": "https://deno.land/x/deno_nest@v3.15.0/modules/hono/mod.ts",
-    "@nest/schedule": "https://deno.land/x/deno_nest@v3.15.0/modules/schedule/mod.ts",
-    "hono/": "https://deno.land/x/hono@v4.1.0/"
+    "@nest/core": "jsr:@nest/core@^0.0.1",
+    "@nest/hono": "jsr:@nest/hono@^0.0.1",
+    "@nest/schedule": "jsr:@nest/schedule@^0.0.2",
   }
 }
 ```

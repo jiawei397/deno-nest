@@ -1,7 +1,7 @@
-# hbs
+# @nest/hbs
 
 This is a `hbs`(`Handlebars`) module for
-[`deno_nest`](https://deno.land/x/deno_nest).
+[`deno_nest`](https://nests.deno.dev/en-US).
 
 You can see the `Handlebars` [document](https://handlebarsjs.com/).
 
@@ -12,10 +12,9 @@ Add import map in `deno.json`:
 ```json
 {
   "imports": {
-    "@nest": "https://deno.land/x/deno_nest@v3.15.0/mod.ts",
-    "@nest/hono": "https://deno.land/x/deno_nest@v3.15.0/modules/hono/mod.ts",
-    "hono/": "https://deno.land/x/hono@v4.1.0/",
-    "@nest/hbs": "https://deno.land/x/deno_nest@v3.15.0/modules/hbs/mod.ts"
+    "@nest/core": "jsr:@nest/core@^0.0.1",
+    "@nest/hono": "jsr:@nest/hono@^0.0.1",
+    "@nest/hbs": "jsr:@nest/hbs@^0.0.1"
   }
 }
 ```

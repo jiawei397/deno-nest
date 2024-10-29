@@ -1,4 +1,4 @@
-# CORS
+# @nest/cors
 
 Forked from the Node.js package `expressjs cors`. Now it is just a simple and
 opinionated cors middleware.
@@ -8,10 +8,9 @@ Add import map in `deno.json`:
 ```json
 {
   "imports": {
-    "@nest": "https://deno.land/x/deno_nest@v3.15.0/mod.ts",
-    "@nest/hono": "https://deno.land/x/deno_nest@v3.15.0/modules/hono/mod.ts",
-    "@nest/cors": "https://deno.land/x/deno_nest@v3.15.0/modules/cors/mod.ts",
-    "hono/": "https://deno.land/x/hono@v4.1.0/"
+    "@nest/core": "jsr:@nest/core@^0.0.1",
+    "@nest/hono": "jsr:@nest/hono@^0.0.1",
+    "@nest/cors": "jsr:@nest/cors@^0.0.1"
   }
 }
 ```

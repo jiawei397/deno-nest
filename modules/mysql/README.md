@@ -1,6 +1,8 @@
-# nest_mysql_module
+# @nest/mysql
 
-This is a mysql module for [`deno_nest`](https://deno.land/x/deno_nest).
+This is a mysql module for [`deno_nest`](https://nests.deno.dev/en-US).
+
+The basic use is `npm:mysql2@^3.11.3`.
 
 ## example
 
@@ -9,11 +11,9 @@ Add import map in `deno.json`:
 ```json
 {
   "imports": {
-    "@nest": "https://deno.land/x/deno_nest@v3.15.0/mod.ts",
-    "@nest/hono": "https://deno.land/x/deno_nest@v3.15.0/modules/hono/mod.ts",
-    "@nest/mysql": "https://deno.land/x/deno_nest@v3.15.0/modules/mysql/mod.ts",
-    "hono/": "https://deno.land/x/hono@v4.1.0/",
-    "mysql": "https://deno.land/x/mysql@v2.11.0/mod.ts"
+    "@nest/core": "jsr:@nest/core@^0.0.1",
+    "@nest/hono": "jsr:@nest/hono@^0.0.1",
+    "@nest/mysql": "jsr:@nest/mysql@^0.0.1"
   }
 }
 ```
@@ -30,11 +30,11 @@ import { AppController } from "./app.controller.ts";
 @Module({
   imports: [
     MysqlModule.forRoot({
-      hostname: "localhost",
-      username: "root",
+      host: "10.100.30.65",
+      user: "root",
       port: 3306,
-      db: "test",
-      poolSize: 3, // connection limit
+      database: "test",
+      pool: 3, // connection limit
       password: "123456",
     }),
   ],
@@ -46,12 +46,14 @@ export class AppModule {}
 Then can be used in `AppController`:
 
 ```ts
-import { Client, MYSQL_KEY } from "@nest/mysql";
-import { Controller, Get, Inject, Query } from "@nest/core";
+import { assert, Controller, Get, Inject, Query } from "@nest/core";
+import { type Client, MYSQL_KEY } from "@nest/mysql";
 
 @Controller("")
 export class AppController {
-  constructor(@Inject(MYSQL_KEY) private readonly client: Client) {}
+  constructor(@Inject(MYSQL_KEY) private readonly client: Client) {
+    assert(this.client, "injected MYSQL_KEY maybe exist");
+  }
 
   @Get("/createUserTable")
   async createUserTable() {
@@ -94,6 +96,13 @@ export class AppController {
     );
     console.log(result);
     return result;
+  }
+
+  @Get('list')
+  async list() {
+    const result = await this.client.query(`select * from users`);
+    console.log(result);
+    return result[0];
   }
 }
 ```
