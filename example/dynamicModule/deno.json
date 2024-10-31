@@ -2,5 +2,8 @@
   "tasks": {
     "dev": "deno run  -A --watch src/main.ts",
     "start": "DENO_ENV=production deno run -A src/main.ts"
+  },
+  "imports": {
+    "@std/dotenv": "jsr:@std/dotenv@^0.225.2"
   }
 }
