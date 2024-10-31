@@ -24,7 +24,7 @@ export class Logger {
   }
 
   private write(
-    methodName: "warning" | "info" | "debug" | "error",
+    methodName: "warn" | "info" | "debug" | "error",
     ...messages: any[]
   ): void {
     if (this.parentName) {
@@ -44,7 +44,7 @@ export class Logger {
   }
 
   warn(...messages: any[]): void {
-    this.write("warning", ...messages);
+    this.write("warn", ...messages);
   }
 
   error(...messages: any[]): void {
