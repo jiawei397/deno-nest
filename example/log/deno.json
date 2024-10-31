@@ -4,6 +4,7 @@
     "start": "DENO_ENV=production deno run -A src/main.ts"
   },
   "imports": {
-    "date_log": "https://deno.land/x/date_log@v1.1.1/mod.ts"
+    "@std/yaml": "jsr:@std/yaml@^1.0.5",
+    "date_log": "jsr:@jw397/date-log@^2.0.0"
   }
 }

@@ -1,5 +1,5 @@
 import { type DateFileLogConfig } from "date_log";
-import { parse as parseYaml } from "std/yaml/mod.ts";
+import { parse as parseYaml } from "@std/yaml";
 
 async function loadYaml<T = unknown>(path: string) {
   const str = await Deno.readTextFile(path);
