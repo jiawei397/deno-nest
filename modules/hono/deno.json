@@ -1,6 +1,6 @@
 {
   "name": "@nest/hono",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "exports": "./mod.ts",
   "tasks": {
     "dev": "deno run  -A --watch example/main.ts"

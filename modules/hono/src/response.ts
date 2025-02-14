@@ -65,10 +65,14 @@ export class NestResponse implements Response {
     });
 
     // deal with body
+    if(body === null || body === undefined ) {
+      return context.body(null);
+    }
     if (
-      body === null || body === undefined || body instanceof ReadableStream ||
-      body instanceof ArrayBuffer
-    ) {
+      body instanceof ReadableStream ||
+      body instanceof ArrayBuffer ||
+      body instanceof Uint8Array
+    ) { 
       return context.body(body);
     }
 
